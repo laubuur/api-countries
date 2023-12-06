@@ -1,0 +1,47 @@
+<input type="text" [(ngModel)]="searchText" />
+<button (click)="search()">Recherche</button>
+@if(countries$) {
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Nom
+                </th>
+                <th>boutons</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Méthode 2 -->
+            <!-- @for(country of countries; track country.area) { -->
+            <!-- Méthode 1 -->
+            @for(country of (countries$ | async); track country.area) {
+                <tr>
+                    <td>{{country.name.common}}</td>
+                    <td><button (click)="searchVoisins(country.borders)">Pays voisins</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@if(voisins.length > 0) {
+    <h1>Voisins</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Nom
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @for(country of voisins; track country.area) {
+                <tr>
+                    <td>{{country.name.common}}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
