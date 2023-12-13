@@ -1,0 +1,18 @@
+@for(pokemon of pokemons; track pokemon.name) {
+    <span (click)="getDetail(pokemon.url)" title="pokemon.name">{{pokemon.name}}</span><br>
+}
+<hr>
+<span (click)="previousPage()"><-</span>
+Page {{page}} sur {{totalPage}}
+<span (click)="nextPage()">-></span><br>
+Nombre total: {{count}}
+
+@if(selectedPokemon !== undefined) {
+    <div class="detail">
+        nom: {{selectedPokemon.name}} <br>
+        id: {{selectedPokemon.id}} <br>
+        hauteur: {{selectedPokemon.height}}<br>
+        <img [src]="selectedPokemon.sprites.front_default" />
+
+    </div>
+}

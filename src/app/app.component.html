@@ -1,9 +1,9 @@
-<app-search />
+<div class="page">
+  <div class="menu">
+    <app-nav></app-nav>
+  </div>
+  <main>
+    <router-outlet />
+  </main>
+</div>
 
-<!-- @for(country of countries; track country.area) {
-  {{country.name.common}} - {{country.name.official}}<br>
-} -->
-
-<!-- @for(country of (countrie2$ | async); track country.area) {
-  {{country.name.common}} <br>
-} -->
