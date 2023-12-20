@@ -16,10 +16,17 @@ export class PokemonComponent {
   count = 0;
   page = 1;
   totalPage = 0;
+  ability: any;
+  abilityFr?: string;
+  description?: string;
+  languages?: any[] = [];
+  selectedLanguage: string = 'fr';
+
   readonly ELEMENTS_PER_PAGE = 10;
 
   ngOnInit() {
     this.getPokemons();
+    this.getLanguages();
   }
 
   nextPage() {
@@ -46,8 +53,29 @@ export class PokemonComponent {
   }
 
   getDetail(url: string) {
+    this.ability = undefined;
+    this.abilityFr = undefined;
+    this.description = undefined;
     this.service.getPokemon(url).subscribe(result => {
       this.selectedPokemon = result;
     })
+  }
+
+  getAbility(url: string) {
+    this.service.getPokemon(url).subscribe(result => {
+      this.ability = result;
+      this.selectLanguageAbility();
+    })
+  }
+
+  selectLanguageAbility() {
+    this.abilityFr = this.ability.names.find((n: any) => n.language.name === this.selectedLanguage).name;
+    this.description = this.ability.flavor_text_entries.find((f: any) => f.language.name === this.selectedLanguage).flavor_text;
+  }
+
+  getLanguages() {
+    this.service.getLanguages().subscribe(result => {
+      this.languages = result.results;
+    });
   }
 }

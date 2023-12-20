@@ -1,6 +1,22 @@
-@for(pokemon of pokemons; track pokemon.name) {
-    <span (click)="getDetail(pokemon.url)" title="pokemon.name">{{pokemon.name}}</span><br>
-}
+<main class="main">
+    <div class="sub">
+        <h3>Pokémons</h3>
+        @for(pokemon of pokemons; track pokemon.name) {
+            <span (click)="getDetail(pokemon.url)" title="pokemon.name">{{pokemon.name}}</span><br>
+        }
+    </div>
+    <div class="sub">
+        <h3>Langues</h3>
+        @for(language of languages; track language) {
+            <span (click)="selectedLanguage = language.name; selectLanguageAbility()" title="pokemon.name" 
+            [class.bold]="selectedLanguage === language.name">
+                {{language.name}}
+            </span>
+            <br>
+        }
+    </div>
+</main>
+
 <hr>
 <span (click)="previousPage()"><-</span>
 Page {{page}} sur {{totalPage}}
@@ -9,10 +25,27 @@ Nombre total: {{count}}
 
 @if(selectedPokemon !== undefined) {
     <div class="detail">
-        nom: {{selectedPokemon.name}} <br>
-        id: {{selectedPokemon.id}} <br>
-        hauteur: {{selectedPokemon.height}}<br>
-        <img [src]="selectedPokemon.sprites.front_default" />
+        <div>
+            <h4>Détails</h4>
+            nom: {{selectedPokemon.name}} <br>
+            id: {{selectedPokemon.id}} <br>
+            hauteur: {{selectedPokemon.height}}<br>
+            <img [src]="selectedPokemon.sprites.front_default" />
+        </div>
+        <div>
+            <h4>Compétences</h4>
+            <!-- {{selectedPokemon.abilities}} -->
+            @for(ability of selectedPokemon.abilities; track ability.ability.name) {
+                <span (click)="getAbility(ability.ability.url)">{{ability.ability.name}} </span><br>
+            }
+        </div>
+        @if(ability) {
+            <div>
+                <h4>Compétence sélectionnée</h4>
+                nom: <strong>{{ability.name}} ({{abilityFr}})</strong><br>
+                description: {{description}}
+            </div>
 
+        }
     </div>
 }

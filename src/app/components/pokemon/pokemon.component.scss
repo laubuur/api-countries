@@ -1,3 +1,16 @@
 .detail {
     border: 2px solid black;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.main {
+    display: flex;
+    gap: 3rem;
+}
+
+.bold {
+    font-weight: bold;
+    color: red;
 }

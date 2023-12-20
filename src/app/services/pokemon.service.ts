@@ -18,4 +18,8 @@ export class PokemonService {
     return this.http.get(url);
   }
 
+  getLanguages(): Observable<any> {
+    return this.http.get('https://pokeapi.co/api/v2/language');
+  }
+
 }
